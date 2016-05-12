@@ -1,0 +1,14 @@
+.idea
+.git
+.gitignore
+README.md
+LICENSE.md
+docker-compose.yml
+VERSION.md
+Gruntfile.js
+package.json
+node_modules
+tests
+Vagrantfile
+.vagrant
+package.box
