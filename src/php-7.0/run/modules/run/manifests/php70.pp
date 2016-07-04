@@ -1,5 +1,5 @@
 class run::php70 {
-  file { '/usr/local/src/phpfarm/inst/php-7.0.6/etc/php-fpm.d/www.conf':
+  file { '/usr/local/src/phpfarm/inst/current/etc/php-fpm.d/www.conf':
     ensure => present,
     content => template('run/www.conf.erb'),
     mode => 644
@@ -30,5 +30,9 @@ class run::php70 {
 
   if $php_ini_memcached == "On" {
     include run::php70::ini::memcached
+  }
+
+  if $php_ini_blackfire == "On" and $php_ini_blackfire_server_id and $php_ini_blackfire_server_token {
+    include run::php70::ini::blackfire
   }
 }

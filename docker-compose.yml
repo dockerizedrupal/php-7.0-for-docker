@@ -1,3 +1,19 @@
+apache:
+  image: dockerizedrupal/apache-2.4:1.2.0
+  hostname: apache
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes_from:
+    - apache-data
+  links:
+    - php
+apache-data:
+  image: dockerizedrupal/apache-2.4:1.2.0
+  hostname: apache-data
+  entrypoint: ["/bin/echo", "Data-only container for Apache."]
+  volumes:
+    - .:/apache/data
 php:
   image: dockerizedrupal/php-7.0:1.0.0
   hostname: php
@@ -8,8 +24,15 @@ php:
     - DRUSH_VERSION=8
     - SMTP_HOST=
     - SMTP_PORT=25
+    - SMTP_FROM=
+    - SMTP_USERNAME=
+    - SMTP_PASSWORD=
     - MYSQL_HOST=
     - MYSQL_PORT=3306
+    - MEMCACHED_HOST=
+    - MEMCACHED_PORT=11211
+    - REDIS_HOST=
+    - REDIS_PORT=6379
     - PHP_INI_REALPATH_CACHE_SIZE=256k
     - PHP_INI_REALPATH_CACHE_TTL=3600
     - PHP_INI_POST_MAX_SIZE=512M
@@ -31,7 +54,14 @@ php:
     - PHP_INI_XDEBUG_REMOTE_HOST=127.0.0.1
     - PHP_INI_XDEBUG_REMOTE_CONNECT_BACK=On
     - PHP_INI_XDEBUG_IDEKEY=PHPSTORM
-    - PHP_INI_XDEBUG_VAR_DISPLAY_MAX_DEPTH=3
+    - PHP_INI_XDEBUG_VAR_DISPLAY_MAX_DEPTH=5
+    - PHP_INI_MEMCACHED=On
+    - PHP_INI_REDIS=On
+    - PHP_INI_BLACKFIRE=On
+    - PHP_INI_BLACKFIRE_SERVER_ID=
+    - PHP_INI_BLACKFIRE_SERVER_TOKEN=
+    - PHP_INI_APCU=On
+    - PHP_INI_APD=On
     - PHP_FPM_PM=dynamic
     - PHP_FPM_PM_MAX_CHILDREN=5
     - PHP_FPM_PM_START_SERVERS=2
@@ -39,26 +69,9 @@ php:
     - PHP_FPM_PM_MAX_SPARE_SERVERS=3
     - PHP_FPM_PM_PROCESS_IDLE_TIMEOUT=10s
     - PHP_FPM_PM_MAX_REQUESTS=0
+    - CRON=On
     - CRONTAB_1_MAILTO=
     - CRONTAB_1_EXPRESSION=
     - CRONTAB_1_COMMAND=
     - USER_ID=
     - GROUP_ID=
-  volumes_from:
-    - apache-data
-apache:
-  image: dockerizedrupal/apache-2.4:1.1.7
-  hostname: apache
-  ports:
-    - "80:80"
-    - "443:443"
-  volumes_from:
-    - apache-data
-  links:
-    - php
-apache-data:
-  image: dockerizedrupal/apache-2.4:1.1.7
-  hostname: apache-data
-  entrypoint: ["/bin/echo", "Data-only container for Apache."]
-  volumes:
-    - .:/apache/data

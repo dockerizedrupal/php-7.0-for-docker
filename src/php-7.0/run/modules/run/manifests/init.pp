@@ -4,6 +4,8 @@ class run {
   include run::php70
   include run::smtp
   include run::drush
+  include run::coder
+  include run::phpcs
   include run::timezone
 
   if $crontab_1_expression and $crontab_1_command {
@@ -22,7 +24,9 @@ class run {
     include run::memcached
   }
 
-  if $freetds_1_server_name {
-    include run::freetds
+  file { '/home/container/.bashrc':
+    ensure => present,
+    content => template('run/.bashrc.erb'),
+    mode => 644
   }
 }

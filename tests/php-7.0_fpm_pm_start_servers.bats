@@ -18,7 +18,7 @@ teardown() {
 }
 
 @test "php-7.0: fpm: pm.start_servers" {
-  run docker exec "$(container)" /bin/su - root -mc "cat /usr/local/src/phpfarm/inst/current/etc/pool.d/www.conf | grep 'pm.start_servers'"
+  run docker exec "$(container)" /bin/su - root -mc "cat /usr/local/src/phpfarm/inst/current/etc/php-fpm.d/www.conf | grep 'pm.start_servers'"
 
   [ "${status}" -eq 0 ]
   [[ "${output}" == *"4"* ]]

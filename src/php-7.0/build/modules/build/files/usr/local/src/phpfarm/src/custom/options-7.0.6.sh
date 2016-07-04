@@ -11,6 +11,8 @@ configoptions="--with-libdir=/lib/x86_64-linux-gnu \
   --enable-mbstring \
   --enable-zip \
   --enable-pcntl \
+  --with-pgsql \
+  --with-pdo-pgsql \
   --with-fpm-user=container \
   --with-fpm-group=container \
   --with-curl \
@@ -32,6 +34,5 @@ configoptions="--with-libdir=/lib/x86_64-linux-gnu \
   --with-pspell \
   --with-ldap=/usr \
   --with-config-file-scan-dir=/usr/local/src/phpfarm/inst/php-7.0.6/etc/conf.d \
-  --with-mssql=/usr/local/freetds \
   --with-readline \
 "

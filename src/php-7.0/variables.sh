@@ -27,6 +27,10 @@ else
   export FACTER_SMTP_PORT="$(echo "${SMTP_PORT}" | cut -d ":" -f2)"
 fi
 
+export FACTER_SMTP_FROM="${SMTP_FROM}"
+export FACTER_SMTP_USERNAME="${SMTP_USERNAME}"
+export FACTER_SMTP_PASSWORD="${SMTP_PASSWORD}"
+
 if [ -n "${MYSQL_HOST}" ]; then
   export FACTER_MYSQL_HOST="${MYSQL_HOST}"
 
@@ -55,6 +59,21 @@ else
 
   export FACTER_MEMCACHED_HOST="$(echo "${MEMCACHED_PORT}" | cut -d ":" -f1)"
   export FACTER_MEMCACHED_PORT="$(echo "${MEMCACHED_PORT}" | cut -d ":" -f2)"
+fi
+
+if [ -n "${REDIS_HOST}" ]; then
+  export FACTER_REDIS_HOST="${REDIS_HOST}"
+
+  if [ -z "${REDIS_PORT}" ]; then
+    REDIS_PORT="6379"
+  fi
+
+  export FACTER_REDIS_PORT="${REDIS_PORT}"
+else
+  REDIS_PORT="$(echo "${REDIS_PORT}" | sed 's/tcp:\/\///')"
+
+  export FACTER_REDIS_HOST="$(echo "${REDIS_PORT}" | cut -d ":" -f1)"
+  export FACTER_REDIS_PORT="$(echo "${REDIS_PORT}" | cut -d ":" -f2)"
 fi
 
 if [ -z "${USER_ID}" ]; then
@@ -212,7 +231,7 @@ fi
 export FACTER_PHP_INI_XDEBUG_IDEKEY="${PHP_INI_XDEBUG_IDEKEY}"
 
 if [ -z "${PHP_INI_XDEBUG_VAR_DISPLAY_MAX_DEPTH}" ]; then
-  PHP_INI_XDEBUG_VAR_DISPLAY_MAX_DEPTH="3"
+  PHP_INI_XDEBUG_VAR_DISPLAY_MAX_DEPTH="5"
 fi
 
 export FACTER_PHP_INI_XDEBUG_VAR_DISPLAY_MAX_DEPTH="${PHP_INI_XDEBUG_VAR_DISPLAY_MAX_DEPTH}"
@@ -222,6 +241,12 @@ if [ -z "${PHP_INI_MEMCACHED}" ]; then
 fi
 
 export FACTER_PHP_INI_MEMCACHED="${PHP_INI_MEMCACHED}"
+
+if [ -z "${PHP_INI_REDIS}" ]; then
+  PHP_INI_REDIS="On"
+fi
+
+export FACTER_PHP_INI_REDIS="${PHP_INI_REDIS}"
 
 if [ -z "${PHP_INI_BLACKFIRE}" ]; then
   PHP_INI_BLACKFIRE="On"
@@ -240,6 +265,18 @@ if [ -z "${PHP_INI_BLACKFIRE_SERVER_TOKEN}" ]; then
 fi
 
 export FACTER_PHP_INI_BLACKFIRE_SERVER_TOKEN="${PHP_INI_BLACKFIRE_SERVER_TOKEN}"
+
+if [ -z "${PHP_INI_APCU}" ]; then
+  PHP_INI_APCU="On"
+fi
+
+export FACTER_PHP_INI_APCU="${PHP_INI_APCU}"
+
+if [ -z "${PHP_INI_APD}" ]; then
+  PHP_INI_APD="On"
+fi
+
+export FACTER_PHP_INI_APD="${PHP_INI_APD}"
 
 if [ -z "${PHP_FPM_PM}" ]; then
   PHP_FPM_PM="dynamic"
@@ -305,40 +342,8 @@ for VARIABLE in $(env); do
   fi
 done
 
-for VARIABLE in $(env); do
-  if [[ "${VARIABLE}" =~ ^FREETDS_[[:digit:]]+_HOST=.*$ ]]; then
-    i="$(echo ${VARIABLE} | awk -F '_' '{ print $2 }')"
+if [ -z "${CRON}" ]; then
+  CRON="On"
+fi
 
-    FREETDS_HOST="FREETDS_${i}_HOST"
-    FREETDS_PORT="FREETDS_${i}_PORT"
-    FREETDS_TDS_VERSION="FREETDS_${i}_TDS_VERSION"
-    FREETDS_SERVER_NAME="FREETDS_${i}_SERVER_NAME"
-    FREETDS_CLIENT_CHARSET="FREETDS_${i}_CLIENT_CHARSET"
-
-    if [ -z "${!FREETDS_HOST}" ]; then
-      continue
-    fi
-
-    if [ -z "${!FREETDS_PORT}" ]; then
-      declare "${FREETDS_PORT}=1433"
-    fi
-
-    if [ -z "${!FREETDS_TDS_VERSION}" ]; then
-      declare "${FREETDS_TDS_VERSION}=8.0"
-    fi
-
-    if [ -z "${!FREETDS_SERVER_NAME}" ]; then
-      declare "${FREETDS_SERVER_NAME}=server-${i}"
-    fi
-
-    if [ -z "${!FREETDS_SERVER_NAME}" ]; then
-      declare "${FREETDS_CLIENT_CHARSET}=UTF-8"
-    fi
-
-    export "FACTER_${FREETDS_HOST}=${!FREETDS_HOST}"
-    export "FACTER_${FREETDS_PORT}=${!FREETDS_PORT}"
-    export "FACTER_${FREETDS_TDS_VERSION}=${!FREETDS_TDS_VERSION}"
-    export "FACTER_${FREETDS_SERVER_NAME}=${!FREETDS_SERVER_NAME}"
-    export "FACTER_${FREETDS_CLIENT_CHARSET}=${!FREETDS_CLIENT_CHARSET}"
-  fi
-done
+export FACTER_CRON="${CRON}"

@@ -18,7 +18,7 @@ teardown() {
 }
 
 @test "php-7.0: fpm: pm.max_requests" {
-  run docker exec "$(container)" /bin/su - root -mc "cat /usr/local/src/phpfarm/inst/current/etc/pool.d/www.conf | grep 'pm.max_requests'"
+  run docker exec "$(container)" /bin/su - root -mc "cat /usr/local/src/phpfarm/inst/current/etc/php-fpm.d/www.conf | grep 'pm.max_requests'"
 
   [ "${status}" -eq 0 ]
   [[ "${output}" == *"500"* ]]
