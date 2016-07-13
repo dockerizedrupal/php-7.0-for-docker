@@ -35,4 +35,5 @@ configoptions="--with-libdir=/lib/x86_64-linux-gnu \
   --with-ldap=/usr \
   --with-config-file-scan-dir=/usr/local/src/phpfarm/inst/php-7.0.8/etc/conf.d \
   --with-readline \
+  --with-freetype-dir \
 "
