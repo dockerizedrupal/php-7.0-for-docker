@@ -1,4 +1,4 @@
-VERSION = "1.1.5"
+VERSION = "2.0.0"
 
 required_plugins = %w(vagrant-vbguest)
 
@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "php"
 
   config.vm.provider "virtualbox" do |v|
-    name = "dockerizedrupal-docker-php-7-0-" + VERSION
+    name = "dockerizedrupal-php-7.0-for-docker-" + VERSION
 
     name.gsub!(".", "-")
 

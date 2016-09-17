@@ -3,7 +3,7 @@ class build::php70::extensions::blackfire {
 
   bash_exec { 'mkdir -p /var/run/blackfire': }
 
-  file { '/usr/local/src/phpfarm/inst/php-7.0.8/lib/php/extensions/no-debug-non-zts-20151012/blackfire-php-linux_amd64-php-70.so':
+  file { '/usr/local/src/phpfarm/inst/php-7.0.11/lib/php/extensions/no-debug-non-zts-20151012/blackfire-php-linux_amd64-php-70.so':
     ensure => present,
     source => 'puppet:///modules/build/tmp/php70/extensions/blackfire/blackfire-php-linux_amd64-php-70.so'
   }

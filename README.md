@@ -1,10 +1,6 @@
-> **Notice:** *This project is part of the [Dockerized Drupal](https://dockerizedrupal.com/) initiative.*
-
-# docker-php-7.0
+# php-7.0-for-docker
 
 A Docker image for [PHP](http://php.net/) version 7.0 that runs PHP in FPM (FastCGI Process Manager) mode.
-
-> **Notice:** *MSSQL, APCU and APD extensions are currently not supported!*
 
 ## Run the container
 
@@ -13,7 +9,7 @@ A Docker image for [PHP](http://php.net/) version 7.0 that runs PHP in FPM (Fast
       -h "${CONTAINER}" \
       -v $(pwd):/apache/data \
       --entrypoint /bin/echo \
-      dockerizedrupal/apache-2.4:1.2.0 "Data-only container for Apache."
+      dockerizedrupal/apache-2.4:2.0.0 "Data-only container for Apache."
 
     CONTAINER="php" && sudo docker run \
       --name "${CONTAINER}" \
@@ -77,7 +73,7 @@ A Docker image for [PHP](http://php.net/) version 7.0 that runs PHP in FPM (Fast
       -e USER_ID="" \
       -e GROUP_ID="" \
       -d \
-      dockerizedrupal/php-7.0:1.1.5
+      dockerizedrupal/php-7.0:2.0.0
 
     CONTAINER="apache" && sudo docker run \
       --name "${CONTAINER}" \
@@ -87,15 +83,15 @@ A Docker image for [PHP](http://php.net/) version 7.0 that runs PHP in FPM (Fast
       --volumes-from apache-data \
       --link php:php \
       -d \
-      dockerizedrupal/apache-2.4:1.2.0
+      dockerizedrupal/apache-2.4:2.0.0
 
 ## Build the image
 
     TMP="$(mktemp -d)" \
       && git clone https://github.com/dockerizedrupal/docker-php.git "${TMP}" \
       && cd "${TMP}" \
-      && git checkout 1.1.5 \
-      && sudo docker build -t dockerizedrupal/php-7.0:1.1.5 . \
+      && git checkout 2.0.0 \
+      && sudo docker build -t dockerizedrupal/php-7.0:2.0.0 . \
       && cd -
 
 ## Tests

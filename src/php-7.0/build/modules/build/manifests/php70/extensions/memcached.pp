@@ -36,18 +36,18 @@ class build::php70::extensions::memcached {
     require => File['/tmp/php-memcached-php7.zip']
   }
 
-  bash_exec { 'cd /tmp/php-memcached-php7 && phpize-7.0.8':
+  bash_exec { 'cd /tmp/php-memcached-php7 && phpize-7.0.11':
     require => Bash_exec['cd /tmp && unzip php-memcached-php7.zip']
   }
 
-  bash_exec { 'cd /tmp/php-memcached-php7 && ./configure --with-php-config=/usr/local/src/phpfarm/inst/bin/php-config-7.0.8 --enable-memcached-igbinary':
+  bash_exec { 'cd /tmp/php-memcached-php7 && ./configure --with-php-config=/usr/local/src/phpfarm/inst/bin/php-config-7.0.11 --enable-memcached-igbinary':
     timeout => 0,
-    require => Bash_exec['cd /tmp/php-memcached-php7 && phpize-7.0.8']
+    require => Bash_exec['cd /tmp/php-memcached-php7 && phpize-7.0.11']
   }
 
   bash_exec { 'cd /tmp/php-memcached-php7 && make':
     timeout => 0,
-    require => Bash_exec['cd /tmp/php-memcached-php7 && ./configure --with-php-config=/usr/local/src/phpfarm/inst/bin/php-config-7.0.8 --enable-memcached-igbinary']
+    require => Bash_exec['cd /tmp/php-memcached-php7 && ./configure --with-php-config=/usr/local/src/phpfarm/inst/bin/php-config-7.0.11 --enable-memcached-igbinary']
   }
 
   bash_exec { 'cd /tmp/php-memcached-php7 && make install':
