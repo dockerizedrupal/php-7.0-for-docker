@@ -32,6 +32,10 @@ class run::php70 {
     include run::php70::ini::memcached
   }
 
+  if $php_ini_redis == "On" {
+    include run::php70::ini::redis
+  }
+
   if $php_ini_blackfire == "On" and $php_ini_blackfire_server_id and $php_ini_blackfire_server_token {
     include run::php70::ini::blackfire
   }
