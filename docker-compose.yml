@@ -15,7 +15,7 @@ apache-data:
   volumes:
     - .:/apache/data
 php:
-  image: dockerizedrupal/php-7.0:2.0.0
+  image: dockerizedrupal/php-7.0:2.0.1
   hostname: php
   environment:
     - SERVER_NAME=localhost

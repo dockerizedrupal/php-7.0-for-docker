@@ -24,6 +24,10 @@ class run {
     include run::memcached
   }
 
+  if $redis_host {
+    include run::redis
+  }
+
   file { '/home/container/.bashrc':
     ensure => present,
     content => template('run/.bashrc.erb'),

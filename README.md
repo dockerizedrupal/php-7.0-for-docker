@@ -73,7 +73,7 @@ A Docker image for [PHP](http://php.net/) version 7.0 that runs PHP in FPM (Fast
       -e USER_ID="" \
       -e GROUP_ID="" \
       -d \
-      dockerizedrupal/php-7.0:2.0.0
+      dockerizedrupal/php-7.0:2.0.1
 
     CONTAINER="apache" && sudo docker run \
       --name "${CONTAINER}" \
@@ -90,8 +90,8 @@ A Docker image for [PHP](http://php.net/) version 7.0 that runs PHP in FPM (Fast
     TMP="$(mktemp -d)" \
       && git clone https://github.com/dockerizedrupal/docker-php.git "${TMP}" \
       && cd "${TMP}" \
-      && git checkout 2.0.0 \
-      && sudo docker build -t dockerizedrupal/php-7.0:2.0.0 . \
+      && git checkout 2.0.1 \
+      && sudo docker build -t dockerizedrupal/php-7.0:2.0.1 . \
       && cd -
 
 ## Tests
@@ -175,6 +175,8 @@ Tests are implemented in [Bats: Bash Automated Testing System](https://github.co
     ok 72 php-7.0: ini: post_max_size
     ok 73 php-7.0: ini: realpath_cache_size
     ok 74 php-7.0: ini: realpath_cache_ttl
+    ok 92 php-7.0: ini: redis: off
+    ok 93 php-7.0: ini: redis: on
     ok 75 php-7.0: ini: short_open_tag: off
     ok 76 php-7.0: ini: short_open_tag: on
     ok 77 php-7.0: ini: timezone
