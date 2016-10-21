@@ -57,6 +57,7 @@ A Docker image for [PHP](http://php.net/) version 7.0 that runs PHP in FPM (Fast
       -e PHP_INI_BLACKFIRE="On" \
       -e PHP_INI_BLACKFIRE_SERVER_ID="" \
       -e PHP_INI_BLACKFIRE_SERVER_TOKEN="" \
+      -e PHP_INI_SYS_TEMP_DIR="" \
       -e PHP_INI_APCU="On" \
       -e PHP_INI_APD="On" \
       -e PHP_FPM_PM="dynamic" \
@@ -73,7 +74,7 @@ A Docker image for [PHP](http://php.net/) version 7.0 that runs PHP in FPM (Fast
       -e USER_ID="" \
       -e GROUP_ID="" \
       -d \
-      dockerizedrupal/php-7.0:2.0.1
+      dockerizedrupal/php-7.0:2.0.2
 
     CONTAINER="apache" && sudo docker run \
       --name "${CONTAINER}" \
@@ -90,8 +91,8 @@ A Docker image for [PHP](http://php.net/) version 7.0 that runs PHP in FPM (Fast
     TMP="$(mktemp -d)" \
       && git clone https://github.com/dockerizedrupal/docker-php.git "${TMP}" \
       && cd "${TMP}" \
-      && git checkout 2.0.1 \
-      && sudo docker build -t dockerizedrupal/php-7.0:2.0.1 . \
+      && git checkout 2.0.2 \
+      && sudo docker build -t dockerizedrupal/php-7.0:2.0.2 . \
       && cd -
 
 ## Tests
