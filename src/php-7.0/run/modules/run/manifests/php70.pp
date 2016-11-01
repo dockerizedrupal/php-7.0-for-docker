@@ -19,6 +19,7 @@ class run::php70 {
   include run::php70::ini::error_reporting
   include run::php70::ini::expose_php
   include run::php70::ini::allow_url_fopen
+  include run::php70::ini::sys_temp_dir
 
   if $php_ini_opcache == "On" {
     include run::php70::ini::opcache

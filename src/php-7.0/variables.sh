@@ -188,6 +188,12 @@ fi
 
 export FACTER_PHP_INI_ALLOW_URL_FOPEN="${PHP_INI_ALLOW_URL_FOPEN}"
 
+if [ -z "${PHP_INI_SYS_TEMP_DIR}" ]; then
+  PHP_INI_SYS_TEMP_DIR="/tmp"
+fi
+
+export FACTER_PHP_INI_SYS_TEMP_DIR="${PHP_INI_SYS_TEMP_DIR}"
+
 if [ -z "${PHP_INI_OPCACHE}" ]; then
   PHP_INI_OPCACHE="On"
 fi

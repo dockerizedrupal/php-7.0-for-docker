@@ -10,18 +10,18 @@ class build::php70::extensions::xdebug {
     require => File['/tmp/xdebug-2.4.0.tgz']
   }
 
-  bash_exec { 'cd /tmp/xdebug-2.4.0 && phpize-7.0.11':
+  bash_exec { 'cd /tmp/xdebug-2.4.0 && phpize-7.0.12':
     require => Bash_exec['cd /tmp && tar xzf xdebug-2.4.0.tgz']
   }
 
-  bash_exec { 'cd /tmp/xdebug-2.4.0 && ./configure --with-php-config=/usr/local/src/phpfarm/inst/bin/php-config-7.0.11':
+  bash_exec { 'cd /tmp/xdebug-2.4.0 && ./configure --with-php-config=/usr/local/src/phpfarm/inst/bin/php-config-7.0.12':
     timeout => 0,
-    require => Bash_exec['cd /tmp/xdebug-2.4.0 && phpize-7.0.11']
+    require => Bash_exec['cd /tmp/xdebug-2.4.0 && phpize-7.0.12']
   }
 
   bash_exec { 'cd /tmp/xdebug-2.4.0 && make':
     timeout => 0,
-    require => Bash_exec['cd /tmp/xdebug-2.4.0 && ./configure --with-php-config=/usr/local/src/phpfarm/inst/bin/php-config-7.0.11']
+    require => Bash_exec['cd /tmp/xdebug-2.4.0 && ./configure --with-php-config=/usr/local/src/phpfarm/inst/bin/php-config-7.0.12']
   }
 
   bash_exec { 'cd /tmp/xdebug-2.4.0 && make install':

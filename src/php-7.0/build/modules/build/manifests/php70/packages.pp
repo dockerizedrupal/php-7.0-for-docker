@@ -18,7 +18,8 @@ class build::php70::packages {
       'pkg-config',
       'libpq-dev',
       'libreadline-dev',
-      'libfreetype6-dev'
+      'libfreetype6-dev',
+      'imagemagick',
     ]:
     ensure => present
   }
