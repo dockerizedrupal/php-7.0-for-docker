@@ -353,3 +353,9 @@ if [ -z "${CRON}" ]; then
 fi
 
 export FACTER_CRON="${CRON}"
+
+if [ -z "${MYSQL_MAX_ALLOWED_PACKET}" ]; then
+  MYSQL_MAX_ALLOWED_PACKET="512M"
+fi
+
+export FACTER_MYSQL_MAX_ALLOWED_PACKET="${MYSQL_MAX_ALLOWED_PACKET}"

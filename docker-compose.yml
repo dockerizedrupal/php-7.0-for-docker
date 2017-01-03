@@ -15,7 +15,7 @@ apache-data:
   volumes:
     - .:/apache/data
 php:
-  image: dockerizedrupal/php-7.0:2.0.2
+  image: dockerizedrupal/php-7.0:2.0.3
   hostname: php
   environment:
     - SERVER_NAME=localhost
@@ -29,6 +29,7 @@ php:
     - SMTP_PASSWORD=
     - MYSQL_HOST=
     - MYSQL_PORT=3306
+    - MYSQL_MAX_ALLOWED_PACKET=512M
     - MEMCACHED_HOST=
     - MEMCACHED_PORT=11211
     - REDIS_HOST=

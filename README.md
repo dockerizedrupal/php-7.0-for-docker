@@ -26,6 +26,7 @@ A Docker image for [PHP](http://php.net/) version 7.0 that runs PHP in FPM (Fast
       -e SMTP_PASSWORD="" \
       -e MYSQL_HOST="" \
       -e MYSQL_PORT="3306" \
+      -e MYSQL_MAX_ALLOWED_PACKET="512M" \
       -e MEMCACHED_HOST="" \
       -e MEMCACHED_PORT="11211" \
       -e REDIS_HOST="" \
@@ -74,7 +75,7 @@ A Docker image for [PHP](http://php.net/) version 7.0 that runs PHP in FPM (Fast
       -e USER_ID="" \
       -e GROUP_ID="" \
       -d \
-      dockerizedrupal/php-7.0:2.0.2
+      dockerizedrupal/php-7.0:2.0.3
 
     CONTAINER="apache" && sudo docker run \
       --name "${CONTAINER}" \
@@ -91,8 +92,8 @@ A Docker image for [PHP](http://php.net/) version 7.0 that runs PHP in FPM (Fast
     TMP="$(mktemp -d)" \
       && git clone https://github.com/dockerizedrupal/docker-php.git "${TMP}" \
       && cd "${TMP}" \
-      && git checkout 2.0.2 \
-      && sudo docker build -t dockerizedrupal/php-7.0:2.0.2 . \
+      && git checkout 2.0.3 \
+      && sudo docker build -t dockerizedrupal/php-7.0:2.0.3 . \
       && cd -
 
 ## Tests
@@ -101,7 +102,7 @@ Tests are implemented in [Bats: Bash Automated Testing System](https://github.co
 
 ### Test results for the current release
 
-    1..87
+    1..89
     ok 1 php-7.0
     ok 2 php-7.0: cron: off
     ok 3 php-7.0: cron: CRONTAB_1_MAILTO: off
@@ -176,21 +177,21 @@ Tests are implemented in [Bats: Bash Automated Testing System](https://github.co
     ok 72 php-7.0: ini: post_max_size
     ok 73 php-7.0: ini: realpath_cache_size
     ok 74 php-7.0: ini: realpath_cache_ttl
-    ok 92 php-7.0: ini: redis: off
-    ok 93 php-7.0: ini: redis: on
-    ok 75 php-7.0: ini: short_open_tag: off
-    ok 76 php-7.0: ini: short_open_tag: on
-    ok 77 php-7.0: ini: timezone
-    ok 78 php-7.0: ini: upload_max_filesize
-    ok 79 php-7.0: ini: xdebug.idekey
-    ok 80 php-7.0: ini: xdebug: off
-    ok 81 php-7.0: ini: xdebug: on
-    ok 82 php-7.0: ini: xdebug.remote_connect_back: off
-    ok 83 php-7.0: ini: xdebug.remote_connect_back: on
-    ok 84 php-7.0: ini: xdebug.remote_host
-    ok 85 php-7.0: ini: xdebug.remote_port
-    ok 86 php-7.0: smtp: off
-    ok 87 php-7.0: smtp: on
+    ok 75 php-7.0: ini: redis: off
+    ok 76 php-7.0: ini: redis: on
+    ok 77 php-7.0: ini: short_open_tag: off
+    ok 78 php-7.0: ini: short_open_tag: on
+    ok 79 php-7.0: ini: timezone
+    ok 80 php-7.0: ini: upload_max_filesize
+    ok 81 php-7.0: ini: xdebug.idekey
+    ok 82 php-7.0: ini: xdebug: off
+    ok 83 php-7.0: ini: xdebug: on
+    ok 84 php-7.0: ini: xdebug.remote_connect_back: off
+    ok 85 php-7.0: ini: xdebug.remote_connect_back: on
+    ok 86 php-7.0: ini: xdebug.remote_host
+    ok 87 php-7.0: ini: xdebug.remote_port
+    ok 88 php-7.0: smtp: off
+    ok 89 php-7.0: smtp: on
 
 ## License
 

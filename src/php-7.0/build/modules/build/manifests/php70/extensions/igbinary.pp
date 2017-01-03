@@ -10,18 +10,18 @@ class build::php70::extensions::igbinary {
     require => File['/tmp/igbinary7-master.zip']
   }
 
-  bash_exec { 'cd /tmp/igbinary7-master && phpize-7.0.12':
+  bash_exec { 'cd /tmp/igbinary7-master && phpize-7.0.14':
     require => Bash_exec['cd /tmp && unzip igbinary7-master.zip']
   }
 
-  bash_exec { 'cd /tmp/igbinary7-master && ./configure --with-php-config=/usr/local/src/phpfarm/inst/bin/php-config-7.0.12 --enable-igbinary':
+  bash_exec { 'cd /tmp/igbinary7-master && ./configure --with-php-config=/usr/local/src/phpfarm/inst/bin/php-config-7.0.14 --enable-igbinary':
     timeout => 0,
-    require => Bash_exec['cd /tmp/igbinary7-master && phpize-7.0.12']
+    require => Bash_exec['cd /tmp/igbinary7-master && phpize-7.0.14']
   }
 
   bash_exec { 'cd /tmp/igbinary7-master && make':
     timeout => 0,
-    require => Bash_exec['cd /tmp/igbinary7-master && ./configure --with-php-config=/usr/local/src/phpfarm/inst/bin/php-config-7.0.12 --enable-igbinary']
+    require => Bash_exec['cd /tmp/igbinary7-master && ./configure --with-php-config=/usr/local/src/phpfarm/inst/bin/php-config-7.0.14 --enable-igbinary']
   }
 
   bash_exec { 'cd /tmp/igbinary7-master && make install':

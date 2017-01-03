@@ -11,4 +11,5 @@ class build {
   include build::postfix
   include build::cron
   include build::drupal_console
+  include build::mysql
 }
